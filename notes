@@ -1,0 +1,6 @@
+Node.js handled I/O - input/output scalability, not computational scalability. 
+Impt that reading from db doesn't slow down the the process
+- when asynchronous I/O methods run the use callback functions to deliver data.
+Computational blocker - process where code takes quite a while to execute, it blocks the actual named process
+- non-blocking computations use spawn processes to run computations separately. 
+
