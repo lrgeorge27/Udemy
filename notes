@@ -7,3 +7,8 @@ Computational blocker - process where code takes quite a while to execute, it bl
 npm install - will install all dependencies needed 
 
 npm install --production - installs all dependencies except those marked dev
+
+app. set - defines a property of the application
+app.get - retreives
+
+Routes:
