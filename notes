@@ -4,3 +4,6 @@ Impt that reading from db doesn't slow down the the process
 Computational blocker - process where code takes quite a while to execute, it blocks the actual named process
 - non-blocking computations use spawn processes to run computations separately. 
 
+npm install - will install all dependencies needed 
+
+npm install --production - installs all dependencies except those marked dev
