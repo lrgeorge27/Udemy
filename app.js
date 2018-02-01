@@ -4,8 +4,14 @@ var path = require('path');
 
 app.set('port', process.env.PORT); //sets port property for entire app
 
-app.use(express.static(path.join(__dirname, 'public')));
+//middleware - allows interaction with request before response is given
+//order is impt - run sequentially in order place in code
+app.use(function(req, res, next){    //can begin function with a path to log only calls to that path
+   console.log(req.method, req.url);
+   next();
+});
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
    console.log("GET the homepage");
