@@ -4,6 +4,9 @@ var path = require('path');
 
 app.set('port', process.env.PORT); //sets port property for entire app
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.get('/', function(req, res){
    console.log("GET the homepage");
    res
