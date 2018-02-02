@@ -4,7 +4,11 @@ var ctrlHotels = require('../controllers/hotels.controllers.js');
 router
     .route('/hotels')
     .get(ctrlHotels.hotelsGetAll); //map controller to route in hotels.controllers
-    
+
+router
+    .route('/hotels/:hotelId') //adding a parameter, controller can access
+    .get(ctrlHotels.hotelsGetOne); //map controller to route in hotels.controllers
+
     
     // .post(function(req, res){
     //     console.log("POST the json route");
