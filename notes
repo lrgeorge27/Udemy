@@ -29,4 +29,12 @@ paganation - count and offset
 
 Need middleware for posted form - npm body parser
 
+Nodemon - utility that monitors node app for changes and restarts app when changes have been made
+-> great for development and never used for production
+-> looks in package.json for scripts.start -> use to run
+-> configure nodemon with nodemon.json in root folder
+    {
+    "ignore": ["public/*"] --> ignore all changes in public folder /* means all 
+    "verbose": true  --> output is more detailed
+    }
 
