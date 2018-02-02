@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-
+var bodyParser = require('body-parser'); //middleware, between static path and routes
+//order is impt with middleware, doesn't need to be run on static path, but needed for routes, so it must come before routes
 var routes = require('./api/routes');
 
 app.set('port', process.env.PORT); //sets port property for entire app
@@ -14,6 +15,8 @@ app.use(function(req, res, next){    //can begin function with a path to log onl
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.urlencoded({extended: false})); //method urlencoded is how html forms are sent, specify extended option to prevent warning in console. False = only need strings and arrays from form body, true = access to other data types
 
 app.use('/api', routes); //With just / app.use looks in routes folder for all routes
 

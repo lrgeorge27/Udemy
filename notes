@@ -14,3 +14,19 @@ app.get - retreives
 Routes:
 
 Separation of concerns - move different types of code into different places to keep them separate from each other
+ - separate logic from routing, UI, data models
+
+Level 12
+Controller - controls what happens when a certain route is visited.
+No hard coded data in route or controllers
+
+Level 13
+URL Parameters
+
+query strings for get requests
+forms for post requests
+paganation - count and offset
+
+Need middleware for posted form - npm body parser
+
+
