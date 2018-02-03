@@ -1,0 +1,40 @@
+//Non-SQL database, collection of documents
+//Data should be stored in terms of what will be output together
+
+[
+    {
+        "PostId": 1, 
+        "Title": "My first post", 
+        "Content": "Some contents", 
+        "Comments": [
+            {
+                "CommentId": 1, 
+                "Content": "Commenting on your first post"
+            }
+        ],
+        "Author": {  //Include only info needed, additional user info in user collection
+            "Id": 1, 
+            "DisplayName": "Lauren George"
+        },
+    }, 
+    {
+        "PostId": 2, 
+        "Title": "My second post", 
+        "Content": "Some contents", 
+        "Comments": [
+            {
+                "CommentId": 2, 
+                "Content": "Commenting on your second post"
+            }, 
+             {
+                "CommentId": 3, 
+                "Content": "Also commenting on your second post"
+            }
+        ]
+    }, 
+    {
+        "PostId": 3, 
+        "Title": "My third post", 
+        "Content": "Some contents", 
+    }, 
+    ]
