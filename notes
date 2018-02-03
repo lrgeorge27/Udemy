@@ -38,3 +38,104 @@ Nodemon - utility that monitors node app for changes and restarts app when chang
     "verbose": true  --> output is more detailed
     }
 
+MongoDB shell version: 2.6.12
+connecting to: test
+Server has startup warnings: 
+2018-02-03T01:18:30.562+0000 ** WARNING: --rest is specified without --httpinterface,
+2018-02-03T01:18:30.562+0000 **          enabling http interface
+> show dbs
+admin  (empty)
+local  0.078GB
+> use local
+switched to db local
+> show collections
+startup_log
+system.indexes
+> use meantest
+switched to db meantest
+> show dbs
+admin  (empty)
+local  0.078GB
+> show collections
+> db.createCollection("tech")
+{ "ok" : 1 }
+> show dbs
+admin     (empty)
+local     0.078GB
+meantest  0.078GB
+> show collections
+system.indexes
+tech
+> db.tech.insert({name: "MongoDB", role: "Database"})
+WriteResult({ "nInserted" : 1 })
+> db.tech.find()
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database" }
+> db.tech.find().pretty()
+{
+        "_id" : ObjectId("5a751172b753db22d4edafdd"),
+        "name" : "MongoDB",
+        "role" : "Database"
+}
+> db.tech.insert(
+... [
+...     {
+...     name: "Express", 
+...     role: "Web application server"
+...     }, 
+...     {
+...     name: "Angular", 
+...     role: "Front-end framework"
+...     },
+...     {
+...     name: "Node",
+...     role: "Platform"
+...     }
+... ])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.tech.find().pretty()
+{
+        "_id" : ObjectId("5a751172b753db22d4edafdd"),
+        "name" : "MongoDB",
+        "role" : "Database"
+}
+{
+        "_id" : ObjectId("5a7512e6b753db22d4edafde"),
+        "name" : "Express",
+        "role" : "Web application server"
+}
+{
+        "_id" : ObjectId("5a7512e6b753db22d4edafdf"),
+        "name" : "Angular",
+        "role" : "Front-end framework"
+}
+{
+        "_id" : ObjectId("5a7512e6b753db22d4edafe0"),
+        "name" : "Node",
+        "role" : "Platform"
+}
+> 
+
+db.tech.insert(
+[
+    {
+    name: "Express", 
+    role: "Web application server"
+    }, 
+    {
+    name: "Angular", 
+    role: "Front-end framework"
+    },
+    {
+    name: "Node",
+    role: "Platform"
+    }
+])
