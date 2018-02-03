@@ -224,6 +224,8 @@ true
 system.indexes
 
 Level 20 - Exporting and Importing Data with MongoDB
+--pretty and --gzip not recognized in c9
+
 Exporting ALL DBs --> BSON, recommended:
 lrgeorge27:~/workspace/Udemy (Section2) $ mongodump
 connected to: 127.0.0.1
@@ -295,4 +297,29 @@ lrgeorge27:~/workspace/Udemy (Section2) $ mongoexport --db meantest --collection
 connected to: 127.0.0.1
 exported 4 records
 
---pretty and --gzip not recognized in c9
+Importing JSON:
+mongoimport --db mean3 --collection tech --jsonArray ./api/data/tech.json
+lrgeorge27:~/workspace/Udemy (Section2) $ mongoimport --db mean3 --collection tech --jsonArray ./api/data/tech.json
+connected to: 127.0.0.1
+2018-02-03T13:42:56.433+0000 imported 4 objects
+
+> show dbs
+admin     (empty)
+local     0.078GB
+mean2     0.078GB
+mean3     0.078GB
+meantest  0.078GB
+> use mean3
+switched to db mean3
+> show collections
+system.indexes
+tech
+> db.tech.find()
+{ "_id" : ObjectId("5a75b449aa7911a2763ec923"), "name" : "Express", "role" : "Web application server" }
+{ "_id" : ObjectId("5a75b449aa7911a2763ec924"), "name" : "Angular", "role" : "Front-end framework" }
+{ "_id" : ObjectId("5a75b449aa7911a2763ec925"), "name" : "Node", "role" : "Platform" }
+{ "_id" : ObjectId("5a75b48aaa7911a2763ec926"), "name" : "MongoDB" }
+> 
+
+Feb 3 2018
+Sec 2 level 21, 5:45min left

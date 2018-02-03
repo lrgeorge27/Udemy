@@ -1,7 +1,12 @@
 //create a controller file for each logical collection of items
+var dbconn = require('../data/dbconnections.js'); //links to node, which connects to mongodb
 var hotelData = require('../data/hotel.data.json'); //link json data file for hotels
 
 module.exports.hotelsGetAll = function(req, res){
+   
+   var db = dbconn.get();
+   console.log("db", db);
+   
    console.log("GET the hotels");
    console.log(req.query);
    
