@@ -38,6 +38,8 @@ Nodemon - utility that monitors node app for changes and restarts app when chang
     "verbose": true  --> output is more detailed
     }
 
+Level 18: MongoDB
+
 MongoDB shell version: 2.6.12
 connecting to: test
 Server has startup warnings: 
@@ -139,3 +141,158 @@ db.tech.insert(
     role: "Platform"
     }
 ])
+Level 19
+lrgeorge27:~/workspace $ mongo
+MongoDB shell version: 2.6.12
+connecting to: test
+Server has startup warnings: 
+2018-02-03T12:41:26.600+0000 ** WARNING: --rest is specified without --httpinterface,
+2018-02-03T12:41:26.600+0000 **          enabling http interface
+> show dbs
+admin     (empty)
+local     0.078GB
+meantest  0.078GB
+> use meantest
+switched to db meantest
+> show collections
+system.indexes
+tech
+> db.tech.find()
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafde"), "name" : "Express", "role" : "Web application server" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "Angular", "role" : "Front-end framework" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node", "role" : "Platform" }
+> db.tech.find({"_id" : ObjectId("5a751172b753db22d4edafdd")})
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database" }
+> db.tech.find({"name": "Angular"})
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "Angular", "role" : "Front-end framework" }
+> db.tech.find().sort({name: 1})
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "Angular", "role" : "Front-end framework" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafde"), "name" : "Express", "role" : "Web application server" }
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node", "role" : "Platform" }
+> db.tech.find().sort({name: -1})
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node", "role" : "Platform" }
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafde"), "name" : "Express", "role" : "Web application server" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "Angular", "role" : "Front-end framework" }
+//projection, {} returns all documents
+> db.tech.find({}, {name: true})
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafde"), "name" : "Express" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "Angular" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node" }
+> db.tech.find({}, {name: true, _id: false})
+{ "name" : "MongoDB" }
+{ "name" : "Express" }
+{ "name" : "Angular" }
+{ "name" : "Node" }
+> db.tech.find({}, {name: 1, _id: 0})
+{ "name" : "MongoDB" }
+{ "name" : "Express" }
+{ "name" : "Angular" }
+{ "name" : "Node" }
+> db.tech.update(
+    {name: "Angular"}, 
+    {$set: {name: "AngularJS"}}
+    )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+ db.tech.find()
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafde"), "name" : "Express", "role" : "Web application server" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "AngularJS", "role" : "Front-end framework" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node", "role" : "Platform" }
+> db.tech.update(     {},      {$set: {language: "JavaScript"}}, {multi: true})
+WriteResult({ "nMatched" : 4, "nUpserted" : 0, "nModified" : 4 })
+> db.tech.find()
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database", "language" : "JavaScript" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafde"), "name" : "Express", "role" : "Web application server", "language" : "JavaScript" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "AngularJS", "role" : "Front-end framework", "language" : "JavaScript" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node", "role" : "Platform", "language" : "JavaScript" }
+//Remove a document
+> db.tech.remove({name: "Express"})
+WriteResult({ "nRemoved" : 1 })
+> db.tech.find()
+{ "_id" : ObjectId("5a751172b753db22d4edafdd"), "name" : "MongoDB", "role" : "Database", "language" : "JavaScript" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafdf"), "name" : "AngularJS", "role" : "Front-end framework", "language" : "JavaScript" }
+{ "_id" : ObjectId("5a7512e6b753db22d4edafe0"), "name" : "Node", "role" : "Platform", "language" : "JavaScript" }
+//WARNING! db.tech.remove({}) --> deletes ALL the documents in a collection
+//Remove a collection
+> db.tech.drop()
+true
+> show collections
+system.indexes
+
+Level 20 - Exporting and Importing Data with MongoDB
+Exporting ALL DBs --> BSON, recommended:
+lrgeorge27:~/workspace/Udemy (Section2) $ mongodump
+connected to: 127.0.0.1
+2018-02-03T13:12:15.852+0000 all dbs
+2018-02-03T13:12:15.853+0000 DATABASE: meantest  to     dump/meantest
+2018-02-03T13:12:15.853+0000    meantest.system.indexes to dump/meantest/system.indexes.bson
+2018-02-03T13:12:15.854+0000             1 documents
+2018-02-03T13:12:15.854+0000    meantest.tech to dump/meantest/tech.bson
+2018-02-03T13:12:15.961+0000             4 documents
+2018-02-03T13:12:15.961+0000    Metadata for meantest.tech to dump/meantest/tech.metadata.json
+2018-02-03T13:12:15.961+0000 DATABASE: admin     to     dump/admin
+lrgeorge27:~/workspace/Udemy (Section2) $ cd dump
+lrgeorge27:~/workspace/Udemy/dump (Section2) $ ls
+admin/  meantest/
+
+Export Single DB:
+lrgeorge27:~/workspace/Udemy (Section2) $ mongodump --db meantest
+connected to: 127.0.0.1
+2018-02-03T13:15:35.708+0000 DATABASE: meantest  to     dump/meantest
+2018-02-03T13:15:35.708+0000    meantest.system.indexes to dump/meantest/system.indexes.bson
+2018-02-03T13:15:35.709+0000             1 documents
+2018-02-03T13:15:35.709+0000    meantest.tech to dump/meantest/tech.bson
+2018-02-03T13:15:35.709+0000             4 documents
+2018-02-03T13:15:35.710+0000    Metadata for meantest.tech to dump/meantest/tech.metadata.json
+
+Import DB --> BSON, recommended:
+lrgeorge27:~/workspace/Udemy (Section2) $ mongorestore --db mean2 dump/meantest
+connected to: 127.0.0.1
+2018-02-03T13:25:54.361+0000 dump/meantest/tech.bson
+2018-02-03T13:25:54.361+0000    going into namespace [mean2.tech]
+4 objects found
+2018-02-03T13:25:54.362+0000    Creating index: { key: { _id: 1 }, name: "_id_", ns: "mean2.tech" }
+
+In Shell:
+> show dbs
+admin     (empty)
+local     0.078GB
+mean2     0.078GB
+meantest  0.078GB
+> use mean2
+switched to db mean2
+> show collections
+system.indexes
+tech
+> db.tech.find()
+{ "_id" : ObjectId("5a75b449aa7911a2763ec923"), "name" : "Express", "role" : "Web application server" }
+{ "_id" : ObjectId("5a75b449aa7911a2763ec924"), "name" : "Angular", "role" : "Front-end framework" }
+{ "_id" : ObjectId("5a75b449aa7911a2763ec925"), "name" : "Node", "role" : "Platform" }
+{ "_id" : ObjectId("5a75b48aaa7911a2763ec926"), "name" : "MongoDB" }
+
+Mongorestore --> only inserts, it does not update the db, only puts in new doc with unique ids
+
+Export JSON:
+mongoexport --db meantest --collection tech (exports to console)
+mongoexport --db meantest --collection tech --out ./api/data/tech.json (exports to file)
+mongoexport --db meantest --collection tech --out ./api/data/tech.json --jsonArray
+
+lrgeorge27:~/workspace/Udemy (Section2) $ mongoexport --db meantest --collection tech
+connected to: 127.0.0.1
+{ "_id" : { "$oid" : "5a75b449aa7911a2763ec923" }, "name" : "Express", "role" : "Web application server" }
+{ "_id" : { "$oid" : "5a75b449aa7911a2763ec924" }, "name" : "Angular", "role" : "Front-end framework" }
+{ "_id" : { "$oid" : "5a75b449aa7911a2763ec925" }, "name" : "Node", "role" : "Platform" }
+{ "_id" : { "$oid" : "5a75b48aaa7911a2763ec926" }, "name" : "MongoDB" }
+exported 4 records
+lrgeorge27:~/workspace/Udemy (Section2) $ mongoexport --db meantest --collection tech --out ./api/data/tech.json
+connected to: 127.0.0.1
+exported 4 records
+lrgeorge27:~/workspace/Udemy (Section2) $ mongoexport --db meantest --collection tech --out ./api/data/tech.json --jsonArray
+connected to: 127.0.0.1
+exported 4 records
+
+--pretty and --gzip not recognized in c9

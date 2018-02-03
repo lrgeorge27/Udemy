@@ -1,0 +1,1 @@
+[{ "_id" : { "$oid" : "5a75b449aa7911a2763ec923" }, "name" : "Express", "role" : "Web application server" },{ "_id" : { "$oid" : "5a75b449aa7911a2763ec924" }, "name" : "Angular", "role" : "Front-end framework" },{ "_id" : { "$oid" : "5a75b449aa7911a2763ec925" }, "name" : "Node", "role" : "Platform" },{ "_id" : { "$oid" : "5a75b48aaa7911a2763ec926" }, "name" : "MongoDB" }]
