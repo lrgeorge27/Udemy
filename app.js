@@ -1,4 +1,4 @@
-require('./api/data/dbconnections.js').open();
+require('./api/data/dbconnections.js').open(); //starts the connection process and saved in a var inside dbconnection.js
 var express = require('express');
 var app = express();
 var path = require('path');
