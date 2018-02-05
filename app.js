@@ -1,4 +1,5 @@
-require('./api/data/dbconnections.js').open(); //starts the connection process and saved in a var inside dbconnection.js
+// require('./api/data/dbconnections.js').open(); //starts the connection process and saved in a var inside dbconnection.js
+require('./api/data/db.js'); //starts connection with mongoose, use either dbconnections.js or mongoose, not both
 var express = require('express');
 var app = express();
 var path = require('path');

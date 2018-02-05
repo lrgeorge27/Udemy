@@ -4,7 +4,7 @@ var dburl = 'mongodb://lrgeorge27-firstworkspace-5563394/meanhotel';
 
 var _connection = null; //hold the connection
 
-//method to open the connection, required in app.js 
+//method to open the connection, required in app.js
 var open = function() {
     //set connection
     MongoClient.connect(dburl, function(err, db){
