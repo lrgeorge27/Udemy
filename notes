@@ -337,3 +337,22 @@ POST        /api/hotels/12345/reviews       Add review for a specific hotel
 GET	        /api/hotels/12345/reviews54321	Get a specific review for a specific hotel	
 PUT	        /api/hotels/12345/reviews54321	Update a specific review for a specific hotel	
 DELETE  	/api/hotels/12345/reviews54321	Delete a specific review	
+
+
+Schemas:
+path: schema type
+
+Schema types:
+string
+boolean
+number
+dates
+buffer
+mongoId object Id
+mixed 
+arrays
+
+
+MongoDB can index coordinates for geolocation
+2D - flat plane
+2D sphere - for sphere plane
