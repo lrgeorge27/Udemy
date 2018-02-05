@@ -59,7 +59,7 @@ var hotelSchema = new mongoose.Schema({
 });
 
 //Model is compiled version of a schema, single instance of a schema has 1:1 relationship with document in db
-mongoose.model('Hotel', hotelSchema, 'hotels');
+mongoose.model('Hotel', hotelSchema);   //, 'hotels'
             //('Name', name of schema, 'mongodb collection') 
 //collection name is optional, mongoose will look for a lowercase pluarlized version of the model name as the collection name.
 //In this case Hotel = hotels, do not need the collection name.

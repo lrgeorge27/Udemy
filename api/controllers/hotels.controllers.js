@@ -1,12 +1,14 @@
 //create a controller file for each logical collection of items
-var dbconn = require('../data/dbconnections.js'); //links to node, which connects to mongodb, has the same state as app.js
-var ObjectId = require('mongodb').ObjectId; //driver has a method to query mongodb using data type, objectId helper
-var hotelData = require('../data/hotel-data.json'); //link json data file for hotels
+// var dbconn = require('../data/dbconnections.js'); //links to node, which connects to mongodb, has the same state as app.js
+// var ObjectId = require('mongodb').ObjectId; //driver has a method to query mongodb using data type, objectId helper
+// var hotelData = require('../data/hotel-data.json'); //link json data file for hotels
+var mongoose = require('mongoose'); //Mongoose is now taking over connections for the native driver
+var Hotel = mongoose.model('Hotel');
 
 module.exports.hotelsGetAll = function(req, res){
    
-   var db = dbconn.get();
-   var collection = db.collection('hotels');
+//   var db = dbconn.get(); //needed for native driver
+//   var collection = db.collection('hotels');
    
     var offset = 0;
     var count = 5;
@@ -19,16 +21,27 @@ module.exports.hotelsGetAll = function(req, res){
       count = parseInt(req.query.count, 10); //take value and set as count value, use parseInt to convert string to num
     }
 
-   collection
-    .find()
-    .skip(offset)
-    .limit(count)
-    .toArray(function(err, docs){
-        console.log("Found hotels", docs);
-           res
-            .status(200)
-            .json(docs);
-    });
+    Hotel
+        .find()
+        .skip(offset)
+        .limit(count)
+        //execute query
+        .exec(function(err, hotels){
+            console.log("Found hotels", hotels.length);
+            res
+                .json(hotels);
+        });
+        
+//   collection
+//     .find()
+//     .skip(offset)
+//     .limit(count)
+//     .toArray(function(err, docs){
+//         console.log("Found hotels", docs);
+//           res
+//             .status(200)
+//             .json(docs);
+//     });
    
 };      
 //   console.log("db", db);
@@ -41,19 +54,16 @@ module.exports.hotelsGetAll = function(req, res){
 
 module.exports.hotelsGetOne = function(req, res){
     
-    var db = dbconn.get();
-    var collection = db.collection('hotels');
-    // console.log("db", db);
-    
+    // var db = dbconn.get();
+    // var collection = db.collection('hotels');
+
     //extract a parameter and put it into a var
     var hotelId = req.params.hotelId;
-    // var thisHotel = hotelData[hotelId]; //holds into about specific hotel using url parameter as location index on hotelData array (json object[0-i])
     console.log("GET hotelId", hotelId);
     
-    collection
-        .findOne({
-            _id: ObjectId(hotelId)
-        }, function(err, doc){
+    Hotel
+        .findById(hotelId)
+        .exec(function(err, doc){
             res
                 .status(200)
                 .json(doc);  
