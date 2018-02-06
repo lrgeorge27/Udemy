@@ -356,3 +356,14 @@ arrays
 MongoDB can index coordinates for geolocation
 2D - flat plane
 2D sphere - for sphere plane
+
+Add ids to hotel reviews in MongoDB:
+
+ db.hotels.update(
+... {},
+... {$set: {"reviews.0._id": ObjectId()}}, 
+... {multi: true})
+
+db.hotels.update(
+{name: "Grand Hotel Palatino"},
+{$set: {"reviews.1._id": ObjectId()}})
