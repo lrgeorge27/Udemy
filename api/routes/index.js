@@ -7,7 +7,7 @@ var ctrlReviews = require('../controllers/reviews.controllers.js');
 router
     .route('/hotels')
     .get(ctrlHotels.hotelsGetAll); //map controller to route in hotels.controllers
-
+//Extend to filter by long/lat to find other hotels near by
 router
     .route('/hotels/:hotelId') //adding a parameter, controller can access
     .get(ctrlHotels.hotelsGetOne); //map controller to route in hotels.controllers

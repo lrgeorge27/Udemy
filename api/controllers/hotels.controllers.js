@@ -5,6 +5,45 @@
 var mongoose = require('mongoose'); //Mongoose is now taking over connections for the native driver
 var Hotel = mongoose.model('Hotel');
 
+var runGeoQuery = function(req, res){
+  //build geo spatial query, need to extract values from string to create Geo Json point
+  var lng = parseFloat(req.query.lng);
+  var lat = parseFloat(req.query.lat);
+  
+  //A geoJson point
+  var point = {
+      type: "Point", 
+      coordinates: [lng, lat]
+  };
+//   var geoOptions = {
+//       spherical: true, 
+//       maxDistance: 2000, //in meters = 2km
+//       num: 5
+//   };
+  
+  Hotel
+    .aggregate([
+        {
+            "$geoNear": {
+                "near": point,
+                "distanceField": "distance",
+                "spherical": true, 
+                "maxDistance": 2000, //in meters = 2km
+                "num": 5
+            }
+        }
+    ], function(err, results, stats){
+        if (err) {
+            console.log(err);
+        }
+        console.log("Geo results: ", results);
+        console.log("Geo stats: ", stats);
+        res
+            .status(200)
+            .json(results);
+    });
+};
+
 module.exports.hotelsGetAll = function(req, res){
    
 //   var db = dbconn.get(); //needed for native driver
@@ -12,6 +51,11 @@ module.exports.hotelsGetAll = function(req, res){
    
     var offset = 0;
     var count = 5;
+    
+    if(req.query && req.query.lat && req.query.lng){
+        runGeoQuery(req, res);
+        return;
+    }
    
     if(req.query && req.query.offset){   //if query property exist, and query property has a offset
       offset = parseInt(req.query.offset, 10); //take value and set as offset value, use parseInt to convert string to num
