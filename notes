@@ -367,3 +367,18 @@ Add ids to hotel reviews in MongoDB:
 db.hotels.update(
 {name: "Grand Hotel Palatino"},
 {$set: {"reviews.1._id": ObjectId()}})
+
+Lecture 31:
+Golden Rules of API Design:
+ - Always return a response
+ - Return the correct HTTP status code
+ - Return contents or a message
+
+Feb 6, 2018
+Lecture 31 - complete, activity PDF
+Error trapping for:
+hotels by location
+get all reviews
+get one review
+
+

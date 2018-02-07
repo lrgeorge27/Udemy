@@ -35,6 +35,9 @@ var runGeoQuery = function(req, res){
     ], function(err, results, stats){
         if (err) {
             console.log(err);
+            res
+                    .status(500)
+                    .json(err);
         }
         console.log("Geo results: ", results);
         console.log("Geo stats: ", stats);
@@ -51,6 +54,7 @@ module.exports.hotelsGetAll = function(req, res){
    
     var offset = 0;
     var count = 5;
+    var maxCount = 10;
     
     if(req.query && req.query.lat && req.query.lng){
         runGeoQuery(req, res);
@@ -64,6 +68,20 @@ module.exports.hotelsGetAll = function(req, res){
     if(req.query && req.query.count){   //if query property exist, and query property has a count
       count = parseInt(req.query.count, 10); //take value and set as count value, use parseInt to convert string to num
     }
+    
+    if (isNaN(offset) || isNaN(count)){ //validate count and offset params are numbers
+        res
+            .status(400)
+            .json({"message": "If supplied in querystring count and offset should be numbers"});
+        return;
+    }
+    
+    if(count > maxCount){
+        res
+            .status(400)
+            .json({"message": "Count limit of " + maxCount + " exceeded"});
+        return;
+    }
 
     Hotel
         .find()
@@ -71,36 +89,19 @@ module.exports.hotelsGetAll = function(req, res){
         .limit(count)
         //execute query
         .exec(function(err, hotels){
-            console.log("Found hotels", hotels.length);
-            res
+            if(err){
+                console.log("Error finding hotels");
+                res
+                    .status(500)
+                    .json(err);
+            } else {
+                console.log("Found hotels", hotels.length);
+                res
                 .json(hotels);
+            }
         });
-        
-//   collection
-//     .find()
-//     .skip(offset)
-//     .limit(count)
-//     .toArray(function(err, docs){
-//         console.log("Found hotels", docs);
-//           res
-//             .status(200)
-//             .json(docs);
-//     });
-   
-};      
-//   console.log("db", db);
- //opening database connection is asynchronous, no gaurantee it will be ready before controller file is brought into app.
- //a GET call on each method makes sure db connection can be made when we need it
- //best practice to open the connection once when app starts and reuse that connection whenever needed
-//   console.log("GET the hotels");
-//   console.log(req.query);
-   
-
+};    
 module.exports.hotelsGetOne = function(req, res){
-    
-    // var db = dbconn.get();
-    // var collection = db.collection('hotels');
-
     //extract a parameter and put it into a var
     var hotelId = req.params.hotelId;
     console.log("GET hotelId", hotelId);
@@ -108,9 +109,24 @@ module.exports.hotelsGetOne = function(req, res){
     Hotel
         .findById(hotelId)
         .exec(function(err, doc){
+            var response = {
+                status: 200,
+                message: doc
+            };
+            if(!doc) {
+                response.status = 404;
+                response.message = {
+                    "message": "Hotel ID not found"
+            };
+            }
+            else if(err){
+                console.log("Error finding hotel");
+                response.status = 500;
+                response.message = err;
+            } 
             res
-                .status(200)
-                .json(doc);  
+                .status(response.status)
+                .json(response.message); 
          });
 };
 
@@ -119,8 +135,7 @@ module.exports.hotelsAddOne = function(req, res){
     var db = dbconn.get();
     var collection = db.collection('hotels');
     var newHotel;
-    // console.log("db", db);
-   
+
     console.log("POST new hotel");
     
     if(req.body && req.body.name && req.body.stars){
