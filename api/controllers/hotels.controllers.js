@@ -130,30 +130,46 @@ module.exports.hotelsGetOne = function(req, res){
          });
 };
 
+var _splitArray = function(input) {
+    var output;
+    if(input && input.length > 0){
+        output = input.split(";");
+    } else {
+        output = [];
+    }
+    return output;
+};
+
 module.exports.hotelsAddOne = function(req, res){
     
-    var db = dbconn.get();
-    var collection = db.collection('hotels');
-    var newHotel;
-
-    console.log("POST new hotel");
-    
-    if(req.body && req.body.name && req.body.stars){
-        newHotel = req.body;
-        newHotel.stars = parseInt(req.body.stars, 10);
-        collection.insertOne(newHotel, function(err, response){
-         console.log(response); 
-         console.log(response.ops);  
-           res
-            .status(201)
-            .json(response.ops);
+    Hotel
+        .create({
+        //key = name of mongoose path, value = value to store in doc
+            name: req.body.name, 
+            description: req.body.description, 
+            stars: parseInt(req.body.stars, 10), 
+            services: _splitArray(req.body.services), 
+            photos: _splitArray(req.body.photos),
+            currency: req.body.currency, 
+            location: {
+                address: req.body.address,
+                coordinates: [parseFloat(req.body.lng), parseFloat(req.body.lat)]
+            }
+        }, function(err, hotel){
+            if(err){
+                console.log("Error creating hotel");
+                res
+                    .status(400)
+                    .json(err);
+            } else {
+                console.log("Hotel created", hotel);
+                res
+                    .status(201)
+                    .json(hotel);
+            }
         });
-    } else {
-        console.log("Data missing from body");
-        res
-            .status(400)
-            .json({message:"Required data missing from body"});
-    }
+
+    
 };
 
 //drive has insertOne method accepts 2 params, data object to be stored and callback function for when object is complete
