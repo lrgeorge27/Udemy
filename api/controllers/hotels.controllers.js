@@ -173,3 +173,61 @@ module.exports.hotelsAddOne = function(req, res){
 };
 
 //drive has insertOne method accepts 2 params, data object to be stored and callback function for when object is complete
+
+module.exports.hotelsUpdateOne = function(req, res){
+    //find doc to create model instance, update data, save mi, send res to requester
+    var hotelId = req.params.hotelId;
+    console.log("GET hotelId", hotelId);
+    
+    Hotel
+        .findById(hotelId)
+        .select("-reviews -rooms") //-key, excludes that key value pair from the response
+        .exec(function(err, doc){
+            var response = {
+                status: 200,
+                message: doc
+            };
+            if(!doc) {
+                response.status = 404;
+                response.message = {
+                    "message": "Hotel ID not found"
+            };
+            }
+            else if(err){
+                console.log("Error finding hotel");
+                response.status = 500;
+                response.message = err;
+            } 
+            if (response.status !== 200){
+                res
+                    .status(response.status)
+                    .json(response.message); 
+            }
+            else{
+                //exclude subdocuments
+                //update data
+               doc.name = req.body.name, 
+               doc.description = req.body.description, 
+               doc.stars = parseInt(req.body.stars, 10), 
+               doc.services = _splitArray(req.body.services), 
+               doc.photos = _splitArray(req.body.photos),
+               doc.currency = req.body.currency, 
+               doc.location = {
+                    address: req.body.address,
+                    coordinates: [parseFloat(req.body.lng), parseFloat(req.body.lat)]
+            };
+            //save model instance to mongoDB
+            doc.save(function(err, hotelUpdated){
+               if(err){
+                   res 
+                     .status(500)
+                     .json(err);
+               } else{
+                   res
+                     .status(204) //success, no content
+                     .json();
+               }
+            });
+            }
+         });
+};
