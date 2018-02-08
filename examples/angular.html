@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Bin</title>
+    <style>
+        .red {
+            border-color: red;
+            color: red;
+        }
+
+        .green {
+            border-color: green;
+            color: green;
+        }
+
+        .purple {
+            color: purple;
+        }
+
+        .ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body ng-cloak>
+    <div ng-init="name = 'Lauren'">
+        {{ name }}
+        <p ng-bind="name"></p>
+    </div>
+
+    <input type="text" name="" id="" ng-model="user">
+    <p> Hello, {{user}}</p>
+
+    <div ng-init="number = 0">
+        <button ng-click="number = number + 1">+1</button>
+        <button ng-click="number = number - 1">-1</button>
+        <p>{{ number }}</p>
+
+    </div>
+
+    Show me the paragraph <input type="checkbox" ng-model="isChecked">
+    <!--<p ng-if="isChecked">Secret message</p>-->
+    <!--ng-if removes element from DOM tree - styling lost, ng-show applies css display non-property to hide - styling remains-->
+    <p ng-show="isChecked" ng-class="purple">Secret message</p>
+
+    <div ng-init="number = 19">
+        <input type="text" ng-model="guess" ng-class="{red: guess != number, green: guess == number}">
+        <!--<p ng-hide="guess !=number">correct</p>-->
+        <!--<p ng-show="guess !=number">incorrect</p>-->
+    </div>
+
+    <div ng-init="numbers = [0, 1, 2, 3, 4, 5, 6, 7]">
+        <ul>
+            <li ng-repeat="number in numbers" ng-class="{red: $even, green: $odd}">{{number}}</li>
+        </ul>
+    </div>
+    <div ng-init="surnames = ['Smith', 'Smith']">
+        <ul>
+            <li ng-repeat="name in surnames track by $index">{{name}}</li>
+        </ul>
+    </div>
+    <div ng-init="names = [{surname:'Smith', firstname:'Joe'}, {surname:'Smith', firstname: 'Sue'}]">
+        <ul>
+            <li ng-repeat="name in names track by $index">{{name.firstname}} {{name.surname}}</li>
+        </ul>
+    </div>
+    <!--Do not use ng-repeat to populate select objects-->
+
+    <div ng-init="rebels = [
+    {name: 'Luke Skywalker', profession: 'Jedi', weapon: 'Lightsaber', age: 19}, 
+    {name: 'Ben Kenobi', profession: 'Jedi', weapon: 'Lightsaber', age: 56}, 
+    {name: 'Han Solo', profession: 'smuggler', weapon: 'laser blaster', age: 32}, 
+    {name: 'Chewbacca', profession: 'pilot', weapon: 'bowcaster', age: 200}, 
+    ];">
+        <select name="" id="" ng-model="rebel" ng-options="rebel.name group by rebel.weapon for rebel in rebels"></select>
+        <p>You have selected: {{rebel.name}} ({{rebel.profession}})</p>
+    </div>
+
+    <div ng-init="rebels = [
+    {name: 'Luke Skywalker', profession: 'Jedi', weapon: 'Lightsaber', age: 19}, 
+    {name: 'Ben Kenobi', profession: 'Jedi', weapon: 'Lightsaber', age: 56}, 
+    {name: 'Han Solo', profession: 'smuggler', weapon: 'laser blaster', age: 32}, 
+    {name: 'Chewbacca', profession: 'pilot', weapon: 'bowcaster', age: 200}, 
+    ];">
+        <ul>
+            <li ng-repeat="rebel in rebels">{{rebel.name}}</li>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+</body>
+
+</html>

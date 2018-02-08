@@ -381,7 +381,12 @@ hotels by location
 get all reviews
 get one review
 
-Feb 7, 2018
-finished lecture 33, create update methods for subdocuments in reviews
-access through parent docs, must be saved through the parent
-combine code from finding a specific review, update hotel, and create new review to solve
+AngularJS 
+Built-in Directives - tell AngularJS to attach special behavior to an element through functionality
+ng-app
+ng-model
+ng-init
+ng-
+
+<input type="text" name="" id="" ng-model="user">
+    <p> Hello, {{user}}</p>
