@@ -386,7 +386,13 @@ Built-in Directives - tell AngularJS to attach special behavior to an element th
 ng-app
 ng-model
 ng-init
-ng-
+ng-show
+ng-hide
+
 
 <input type="text" name="" id="" ng-model="user">
     <p> Hello, {{user}}</p>
+    
+Filters - select a subset of items from data and return it as new data collection
+{{name | currency}}
+can do {{currency: "other symbol"}} - if using something beside $

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Bin filters</title>
+</head>
+
+<body>
+    <div ng-init="amount = 1250.50">
+        <p> {{amount | currency}} </p>
+        <p> {{amount | number: 4}} </p>
+        <p> {{-amount | number: 2}} </p>
+    </div>
+    <div ng-init="string = 'star wars'">
+        <p> {{string | uppercase}} </p>
+        <p> {{string | lowercase}} </p>
+    </div>
+    <div ng-init="myDate = 1399648945000">
+        <p> {{myDate | date}} </p>
+        <p> {{myDate | date:'medium'}} </p>
+        <p> {{myDate | date: 'yyyy - MMMM - d (H:m)'}} </p>
+    </div>
+    <div ng-init="myArray = [0,1,2,3,4,5]">
+        <p> {{myArray | limitTo: 4}} </p>
+        <p> {{myArray | limitTo: -2}} </p>
+    </div>
+
+    <div ng-init="rebels = [
+    {name: 'Luke Skywalker', profession: 'Jedi', weapon: 'lightsaber', age: 19}, 
+    {name: 'Ben Kenobi', profession: 'Jedi', weapon: 'lightsaber', age: 56}, 
+    {name: 'Han Solo', profession: 'smuggler', weapon: 'laser blaster', age: 32}, 
+    {name: 'Chewbacca', profession: 'pilot', weapon: 'bowcaster', age: 200}, 
+    ];">
+        <ul>
+            <li ng-repeat="rebel in rebels | orderBy: 'name'">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="rebel in rebels | orderBy: 'age'">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="rebel in rebels | orderBy: '-age'">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="rebel in rebels | orderBy: ['profession', '-age']">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>
+        </ul>
+        <!--<input type="text" ng-model="search">-->
+        <!--<ul>-->
+        <!--    <li ng-repeat="rebel in rebels | filter: search ">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>-->
+        <!--</ul>-->
+        Weapon filter: <input type="text" ng-model="search.weapon"> Free text search: <input type="text" ng-model="search.$">
+        <ul>
+            <li ng-repeat="rebel in rebels | filter: search ">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>
+        </ul>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+</body>
+
+</html>
