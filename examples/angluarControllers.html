@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Bin Controller</title>
+    <script>
+    </script>
+</head>
+
+<body>
+    <div ng-controller='MyController as MyCtrl'>
+        <div ng-controller='StarWarsController'>
+            <ul>
+                <li ng-repeat="rebel in rebels">{{rebel.name}} (age: {{rebel.age}}) is a {{rebel.profession}} fighting with a {{rebel.weapon}}</li>
+            </ul>
+            <br> {{ number }}
+            <p>
+                <button ng-click="increment(5)">+5</button>
+                <button ng-click="decrement(5)">-5</button>
+            </p>
+        </div>
+        <div ng-controller='MySecondController as MySecondCtrl'>
+            {{MyCtrl.name}} <br> {{MySecondCtrl.name}}
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script>
+        angular.module('myApp', [])
+            .controller('StarWarsController', StarWarsController)
+            .controller('MyController', MyController)
+            .controller('MySecondController', MySecondController)
+
+        function StarWarsController($scope) {
+            $scope.rebels = [
+                { name: 'Luke Skywalker', profession: 'Jedi', weapon: 'lightsaber', age: 19 },
+                { name: 'Ben Kenobi', profession: 'Jedi', weapon: 'lightsaber', age: 56 },
+                { name: 'Han Solo', profession: 'smuggler', weapon: 'laser blaster', age: 32 },
+                { name: 'Chewbacca', profession: 'pilot', weapon: 'bowcaster', age: 200 },
+            ];
+            $scope.number = 0;
+            $scope.increment = function(amount) {
+                $scope.number = $scope.number + amount;
+            }
+            $scope.decrement = function(amount) {
+                $scope.number = $scope.number - amount;
+            }
+        }
+        // Controllers as syntax
+        function MyController() {
+            var vm = this;
+            // vm --> view model
+            vm.name = 'Star Wars';
+        }
+
+        function MySecondController() {
+            var vm = this;
+            vm.name = 'Lauren';
+        }
+    </script>
+
+</body>
+
+</html>

@@ -396,3 +396,6 @@ ng-hide
 Filters - select a subset of items from data and return it as new data collection
 {{name | currency}}
 can do {{currency: "other symbol"}} - if using something beside $
+
+Controllers
+Parameters - $scope - glue btwn controller and view
