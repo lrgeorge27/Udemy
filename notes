@@ -399,3 +399,6 @@ can do {{currency: "other symbol"}} - if using something beside $
 
 Controllers
 Parameters - $scope - glue btwn controller and view
+ 
+ 
+python -m SimpleHTTPServer $PORT
