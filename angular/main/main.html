@@ -1,3 +1,7 @@
 <h1>
     Hello, {{vm.name}}!</h1>
+
+<ul>
+    <li ng-repeat="film in vm.films">{{film.title}}, Episode: {{film.episode_id}}</li>
+</ul>
 <!--No need for ng-controller directive. In route definition already telling code that main.html will be using MyController-->
