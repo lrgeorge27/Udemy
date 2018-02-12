@@ -407,3 +407,5 @@ Custom services
 service vs factory
 service - inject argument that provides an instance of a function, uses a new function keyword
 factory - injectable argument that provides a value that is returned by invoking function reference passed to the module.factory function
+
+Creating custom filters
