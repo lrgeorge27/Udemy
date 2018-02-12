@@ -1,7 +1,7 @@
 /* global angular */
 angular.module('meanhotel').controller('HotelController', HotelController);
 
-function HotelController(hotelDataFactory, $routeParams){
+function HotelController($route, $routeParams, hotelDataFactory){
     var vm = this;
     var id = $routeParams.id;
     hotelDataFactory.hotelDisplay(id).then(function(response){
