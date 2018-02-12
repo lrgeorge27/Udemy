@@ -17,6 +17,7 @@ app.use(function(req, res, next){    //can begin function with a path to log onl
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 app.use(bodyParser.urlencoded({extended: false})); //method urlencoded is how html forms are sent, specify extended option to prevent warning in console. False = only need strings and arrays from form body, true = access to other data types
 

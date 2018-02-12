@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="meanHotel">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <h1>MEAN Hotel homepage</h1>
+
+    <div ng-view></div>
 
 
     <footer class="footer">
@@ -26,7 +27,11 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>-->
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="angular-app/app.js"></script>
+
 </body>
 
 </html>
