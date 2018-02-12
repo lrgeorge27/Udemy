@@ -1,5 +1,5 @@
 /* global angular */
-angular.module('meanHotel').controller('HotelsController', HotelsController);
+angular.module('meanhotel').controller('HotelsController', HotelsController);
 
 function HotelsController(hotelDataFactory){
     var vm = this;

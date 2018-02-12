@@ -1,7 +1,7 @@
 //angular-app folder
 /* global angular HotelsController HotelController */
 
-angular.module('meanHotel', ['ngRoute']).config(config);
+angular.module('meanhotel', ['ngRoute']).config(config);
 
 function config($routeProvider){
     $routeProvider

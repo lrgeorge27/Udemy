@@ -1,5 +1,5 @@
 /* global angular id*/
-angular.module('meanHotel').factory('hotelDataFactory', hotelDataFactory);
+angular.module('meanhotel').factory('hotelDataFactory', hotelDataFactory);
 
 function hotelDataFactory($http){
     return {
@@ -13,6 +13,7 @@ function hotelDataFactory($http){
     
     function hotelDisplay(){
         return $http.get('/api/hotels/' + id).then(complete).catch(failed);
+        //'#/api/hotels/' links to data in db, 
     }
     
     function complete(response){
