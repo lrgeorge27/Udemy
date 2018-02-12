@@ -18,7 +18,7 @@ function MainController(FilmFactory){
     
     vm.date1 = '12 February 2018';
     vm.date2 = '11 March 2018';
-    vm.date3 = '3 January 2015';
+    vm.date3 = '03 January 2015';
     vm.date4 = '25 April 2014';
 
     

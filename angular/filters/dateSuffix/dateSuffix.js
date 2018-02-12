@@ -1,8 +1,8 @@
-/* global angular $filter */
+/* global angular */
 
 angular.module('myApp').filter('dateSuffix', dateSuffix);
 
-function dateSuffix(sfilter){
+function dateSuffix($filter){
     var suffixes = ['th', 'st', 'nd', 'rd'];
     
     return function(string){
