@@ -415,3 +415,14 @@ form validation attributes:
 HTML5 - required, email, number, url
 AngularJS - ng-min length, max length, pattern
 ng-minlength="3" ng-maxlength="10"
+
+JSON Web Tokens, JWT('jot')
+'header', 'payload', 'signature'
+- payload contains data - username
+
+backend code:
+generate token
+handle registration/login
+
+frontend code:
+handle authentication from the UI

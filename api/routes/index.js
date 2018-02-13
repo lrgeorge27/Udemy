@@ -3,6 +3,7 @@ var router = express.Router();  //Instantiate express router
 
 var ctrlHotels = require('../controllers/hotels.controllers.js');
 var ctrlReviews = require('../controllers/reviews.controllers.js');
+var ctrlUsers = require('../controllers/user.controllers.js');
 
 router
     .route('/hotels')
@@ -27,5 +28,14 @@ router
     .get(ctrlReviews.reviewsGetOne) //map controller to route in hotels.controllers
     .put(ctrlReviews.reviewsUpdateOne) //method to update single review doc with a single hotel doc
     .delete(ctrlReviews.reviewsDeleteOne);
+    
+//authentication
+router
+    .route('/users/register')
+    .post(ctrlUsers.register);
+    
+    router
+        .route('/users/login')
+        .post(ctrlUsers.login);
 
 module.exports = router;    //export
