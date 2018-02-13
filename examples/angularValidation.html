@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Bin Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script>
+        angular.module('myApp', []).controller('MyController', MyController);
+
+        function MyController() {
+            var vm = this;
+            vm.isSubmitted = false;
+            vm.add = function() {
+                if (vm.myForm.$valid) {
+                    console.log("Added to database...");
+                }
+                else {
+                    vm.isSubmitted = true;
+                }
+            };
+            // vm.message = 'hello';
+        }
+    </script>
+
+</head>
+
+<body>
+    <div ng-controller="MyController as vm">
+        {{vm.message}}
+
+
+        <form name="vm.myForm" ng-submit="vm.add()">
+            <input type="text" name="name" required ng-pattern="/^[0-9]{2,3}$/" ng-model="name">
+            <div ng-show="vm.myForm.name.$dirty && vm.myForm.name.$invalid && vm.isSubmitted">
+                <p>This field requires 2 or 3 digits</p>
+            </div>
+            <button type="submit">Add Data</button>
+        </form>
+        <!--<p>{{myForm.$pristine}}</p>-->
+        <!--<p>{{myForm.$dirty}}</p>-->
+        <!--<p>Name is invalid: {{myForm.name.$invalid}}</p>-->
+
+    </div>
+</body>
+
+</html>
