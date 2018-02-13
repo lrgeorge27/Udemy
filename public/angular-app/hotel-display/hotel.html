@@ -1,6 +1,7 @@
 <h1>Information on {{vm.hotel.name}} -
     <hotel-rating stars="vm.stars"></hotel-rating>
-</h1>
+    <!--{{vm.stars}} Stars-->
+    </h1>
 <p><small>{{vm.hotel.location.address}}</small></p>
 
 <p>{{vm.hotel.description}}</p>
@@ -11,7 +12,7 @@
 
 <h3>Reviews</h3>
 <ul>
-    <li ng-repeat="review in vm.hotel.reviews"><strong>{{review.name}} says:</strong>{{review.review}}</li>
+    <li ng-repeat="review in vm.hotel.reviews"><strong>{{review.name}} says: </strong>{{review.review}}</li>
 </ul>
 
 <form name="vm.reviewForm" ng-submit="vm.addReview()">

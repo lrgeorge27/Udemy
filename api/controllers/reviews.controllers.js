@@ -4,11 +4,11 @@ var Hotel = mongoose.model('Hotel');
 
 //GET all reviews for a hotel
 module.exports.reviewsGetAll = function(req, res){
-    var hotelId = req.params.hotelId;
-    console.log("GET hotelId", hotelId);
+    var id = req.params.hotelId;
+    console.log("GET hotelId", id);
     
     Hotel
-        .findById(hotelId)
+        .findById(id)
         .select('reviews')
         .exec(function(err, doc){
             if(!doc) {
@@ -106,26 +106,26 @@ var _addReview = function(req, res, hotel){
 
 
 module.exports.reviewsAddOne = function(req, res){
-    var hotelId = req.params.hotelId;
-    console.log("GET hotelId", hotelId);
+    var id = req.params.hotelId;
+    console.log("GET hotelId", id);
     
     Hotel
-        .findById(hotelId)
+        .findById(id)
         .select('reviews')
         .exec(function(err, doc){
             var response = {
                 status: 200,
                 message: []
-            }
+            };
             if(err){
                 console.log("Error finding hotel");
                 response.status = 500;
                 response.message = err;
             }
             else if(!doc) {
-                console.log("Hotel not found", hotelId);
+                console.log("Hotel not found", id);
                 response.status = 404;
-                response.message = {"message": "Hotel ID not found " + hotelId};
+                response.message = {"message": "Hotel ID not found " + id};
             }
             if (doc){
                 _addReview(req, res, doc);
@@ -196,7 +196,7 @@ module.exports.reviewsUpdateOne = function(req, res){
 };
 
 module.exports.reviewsDeleteOne = function(req, res){
-     var hotelId = req.params.hotelId;
+     var hotelid = req.params.hotelId;
     var reviewId = req.params.reviewId;
     console.log('PUT reviewId ' + reviewId + ' for hotelId ' + hotelId);
     

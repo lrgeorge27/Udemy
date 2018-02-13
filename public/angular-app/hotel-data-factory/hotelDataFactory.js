@@ -12,7 +12,7 @@ function hotelDataFactory($http){
         return $http.get('/api/hotels?count=10').then(complete).catch(failed);
     }
     
-    function hotelDisplay(){
+    function hotelDisplay(id){
         return $http.get('/api/hotels/' + id).then(complete).catch(failed);
         //'#/api/hotels/' links to data in db, 
     }

@@ -1,7 +1,7 @@
 //Do not need both dbconnections.js and db.js with mongoose, in a reg app use one or the other.
 var mongoose = require('mongoose');
 var dburl = 'mongodb://lrgeorge27-firstworkspace-5563394/meanhotel';
-
+//var retry = null;
 mongoose.connect(dburl);
 
 //Listeners
@@ -40,4 +40,5 @@ process.once('SIGUSR2', function(){    //killed process, ctrl C in command line
 }); 
 
 //Bring in schemas and models
-require('./hotels.model.js');
+require('./hotels.model');
+//deleted .js from end of ./hotels.model to match gitHub

@@ -10,7 +10,7 @@ function config($routeProvider){
             controller: HotelsController,
             controllerAs: 'vm'
         })
-        .when('/hotels/:id', {
+        .when('/hotel/:id', { //removed s from /hotels/ to match changes in hotels.html
             templateUrl: 'angular-app/hotel-display/hotel.html', 
             controller: HotelController, 
             controllerAs: 'vm'

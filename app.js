@@ -25,6 +25,7 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use(bodyParser.urlencoded({extended: false})); //method urlencoded is how html forms are sent, specify extended option to prevent warning in console. False = only need strings and arrays from form body, true = access to other data types
 app.use(bodyParser.json()); //look for json data
 
+//add routing
 app.use('/api', routes); //With just / app.use looks in routes folder for all routes
 
 // app.get('/', function(req, res){

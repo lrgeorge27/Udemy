@@ -54,7 +54,7 @@ module.exports.hotelsGetAll = function(req, res){
    
     var offset = 0;
     var count = 5;
-    var maxCount = 10;
+    var maxCount = 20;
     
     if(req.query && req.query.lat && req.query.lng){
         runGeoQuery(req, res);
@@ -97,17 +97,18 @@ module.exports.hotelsGetAll = function(req, res){
             } else {
                 console.log("Found hotels", hotels.length);
                 res
-                .json(hotels);
+                    .json(hotels);
             }
         });
-};    
+}; 
+
 module.exports.hotelsGetOne = function(req, res){
     //extract a parameter and put it into a var
-    var hotelId = req.params.hotelId;
-    console.log("GET hotelId", hotelId);
+    var id = req.params.hotelId;
+    console.log("GET hotelId", id);
     
     Hotel
-        .findById(hotelId)
+        .findById(id)
         .exec(function(err, doc){
             var response = {
                 status: 200,
