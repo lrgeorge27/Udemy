@@ -1,0 +1,37 @@
+<nav ng-controller="LoginController as vm" class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" ng-init="vm.init()">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarColor01" aria-expanded="false" aria-controls="navbarColor01">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+         </button>
+            <a class="navbar-brand" href="#/">MeanHotel</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li ng-class="vm.isActiveTab('')" class="nav-item active"><a class="nav-link" href="#/">Home</a></li>
+                <li ng-class="vm.isActiveTab('hotels')" class="nav-item active"><a class="nav-link" href="#/hotels">Hotels</a></li>
+                <li ng-class="vm.isActiveTab('register')" class="nav-item active"><a class="nav-link" href="#/register">Register</a></li>
+            </ul>
+            <form ng-if="!vm.isLoggedIn()" class="form-inline my-2 my-lg-0" role="login" ng-submit="vm.loggin()">
+                <div class="form-group" ng-class="{'has-error': vm.error}">
+                    <input type="text" class="form-control form-control-sm" placeholder="Username" ng-model="vm.username" autocapitalize="none" />
+                </div>
+                <div class="form-group" ng-class="{'has-error': vm.error}">
+                    <input type="password" class="form-control form-control-sm" placeholder="Password" ng-model="vm.password" autocapitalize="none" />
+                </div>
+                <button type="submit" class="btn btn-secondary btn-sm">Login</button>
+            </form>
+            <ul ng-if="vm.isLoggedIn()" class="navbar-nav mr-auto">
+                <li>
+                    <p class="navbar-text">Welcome back {{vm.loggedinUser}}</p>
+                </li>
+                <li><button class="btn btn-secondary btn-sm" ng-click="vm.logout()">Logout</button> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--navbar-form navbar-right-->
+<!--div class="form-group"-->
