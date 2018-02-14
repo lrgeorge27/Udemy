@@ -51,6 +51,7 @@ module.exports.hotelsGetAll = function(req, res){
    
 //   var db = dbconn.get(); //needed for native driver
 //   var collection = db.collection('hotels');
+    console.log('Requested by: ' + req.user);
    
     var offset = 0;
     var count = 5;

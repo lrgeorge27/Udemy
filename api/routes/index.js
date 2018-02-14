@@ -7,7 +7,7 @@ var ctrlUsers = require('../controllers/user.controllers.js');
 
 router
     .route('/hotels')
-    .get(ctrlHotels.hotelsGetAll) //map controller to route in hotels.controllers
+    .get(ctrlUsers.authenticate, ctrlHotels.hotelsGetAll) //map controller to route in hotels.controllers
     .post(ctrlHotels.hotelsAddOne); 
 
 //Extend to filter by long/lat to find other hotels near by
