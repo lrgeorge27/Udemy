@@ -51,7 +51,7 @@ module.exports.login = function(req, res){
 module.exports.authenticate = function(req, res, next){ //express middleware, access to request and response objects, execute code, make changes to objects, and end req/res cycle
     var headerExists = req.headers.authorization;
     if (headerExists){
-        var token = req.headers.authorization.split(' ')[1];
+        var token = req.headers.authorization.split(' ')[1]; //Authorization Bearer xxx
         jwt.verify(token, 's3cr3t', function(error, decoded){
             if (error){
                 console.log(error);

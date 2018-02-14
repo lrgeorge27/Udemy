@@ -1,5 +1,5 @@
 //angular-app folder
-/* global angular HotelsController HotelController */
+/* global angular HotelsController HotelController RegisterController*/
 
 angular.module('meanhotel', ['ngRoute']).config(config);
 
@@ -14,6 +14,11 @@ function config($routeProvider){
             templateUrl: 'angular-app/hotel-display/hotel.html', 
             controller: HotelController, 
             controllerAs: 'vm'
+        })
+        .when('/register', {
+            templateUrl: 'angular-app/register/register.html', 
+            controller: RegisterController,
+            controllerAs:'vm'
         });
 }
 

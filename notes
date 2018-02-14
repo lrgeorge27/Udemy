@@ -428,3 +428,4 @@ frontend code:
 handle authentication from the UI
 
 token is now used in requests against secured endpoints
+
