@@ -25,10 +25,12 @@
                 <button type="submit" class="btn btn-secondary btn-sm">Login</button>
             </form>
             <ul ng-if="vm.isLoggedIn()" class="navbar-nav mr-auto">
-                <li>
-                    <p class="navbar-text">Welcome back {{vm.loggedinUser}} </p>
-                </li>
+                <!--<div class="form-group">-->
+                <li class="navbar-text">Welcome back {{vm.loggedInUser}}</li>
+                <!--</div>-->
+                <!--<div class="form-group">-->
                 <li><button class="btn btn-secondary btn-sm" ng-click="vm.logout()">Logout</button> </li>
+                <!--</div>-->
             </ul>
         </div>
     </div>
