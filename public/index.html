@@ -11,8 +11,10 @@
 </head>
 
 <body>
-    <!--Navigation directive linked to navigationDirective.html-->
-    <mh-navigation></mh-navigation>
+    <div>
+        <!--Navigation directive linked to navigationDirective.html-->
+        <mh-navigation></mh-navigation>
+    </div>
 
     <div class="container">
         <div ng-view></div>
@@ -20,20 +22,21 @@
 
 
     <footer class="footer">
-        <div class="container">
-            <p class="text-warning text-center">
-                <a href="http://fullstacktraining.com" target="_blank"><img src="/images/MeanStackLogo.jpg" height="26" alt="MEAN Stack logo"/></a>
-            </p>
-            <p class="text-warning text-center">
-                <small>&copy: 2018 Full Stack Training Ltd</small>
-            </p>
-        </div>
+        <!--<div class="container">-->
+        <p class="text-warning text-center">
+            <a href="http://fullstacktraining.com" target="_blank"><img src="/images/MeanStackLogo.jpg" height="26" alt="MEAN Stack logo"/></a>
+        </p>
+        <p class="text-warning text-center">
+            <small>&copy: 2018 Full Stack Training Ltd</small>
+        </p>
+        <!--</div>-->
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>-->
     <script type="text/javascript" src="node_modules/angular/angular.js"></script>
     <script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="node_modules/angular-jwt/dist/angular-jwt.js"></script>
     <script type="text/javascript" src="angular-app/app.js"></script>
     <script type="text/javascript" src="angular-app/hotel-list/hotelListController.js"></script>
     <script type="text/javascript" src="angular-app/hotel-display/hotelDisplayController.js"></script>
@@ -43,6 +46,8 @@
     <script type="text/javascript" src="angular-app/register/registerController.js"></script>
     <script type="text/javascript" src="angular-app/navigationDirective/navigationDirective.js"></script>
     <script type="text/javascript" src="angular-app/login/loginController.js"></script>
+    <script type="text/javascript" src="angular-app/auth/authFactory.js"></script>
+    <script type="text/javascript" src="angular-app/auth/authInterceptor.js"></script>
 
 </body>
 

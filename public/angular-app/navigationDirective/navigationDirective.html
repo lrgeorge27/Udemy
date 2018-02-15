@@ -6,15 +6,16 @@
             <span class="navbar-toggler-icon"></span>
             <span class="navbar-toggler-icon"></span>
          </button>
-            <a class="navbar-brand" href="#/">MeanHotel</a>
+            <a class="navbar-brand" href="/">MeanHotel</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li ng-class="vm.isActiveTab('')" class="nav-item active"><a class="nav-link" href="#/">Home</a></li>
-                <li ng-class="vm.isActiveTab('hotels')" class="nav-item active"><a class="nav-link" href="#/hotels">Hotels</a></li>
-                <li ng-class="vm.isActiveTab('register')" class="nav-item active"><a class="nav-link" href="#/register">Register</a></li>
+                <li ng-class="vm.isActiveTab('')" class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                <li ng-class="vm.isActiveTab('hotels')"><a class="nav-link" href="#!/hotels">Hotels</a></li>
+                <li ng-class="vm.isActiveTab('register')" ng-if="!vm.isLoggedIn()"><a class="nav-link" href="#!/register">Register</a></li>
+                <li ng-class="vm.isActiveTab('profile')" ng-if="vm.isLoggedIn()"><a class="nav-link" href="#!/profile">Profile</a></li>
             </ul>
-            <form ng-if="!vm.isLoggedIn()" class="form-inline my-2 my-lg-0" role="login" ng-submit="vm.loggin()">
+            <form ng-if="!vm.isLoggedIn()" class="form-inline my-2 my-lg-0" role="login" ng-submit="vm.login()">
                 <div class="form-group" ng-class="{'has-error': vm.error}">
                     <input type="text" class="form-control form-control-sm" placeholder="Username" ng-model="vm.username" autocapitalize="none" />
                 </div>
@@ -25,7 +26,7 @@
             </form>
             <ul ng-if="vm.isLoggedIn()" class="navbar-nav mr-auto">
                 <li>
-                    <p class="navbar-text">Welcome back {{vm.loggedinUser}}</p>
+                    <p class="navbar-text">Welcome back {{vm.loggedinUser}} </p>
                 </li>
                 <li><button class="btn btn-secondary btn-sm" ng-click="vm.logout()">Logout</button> </li>
             </ul>
